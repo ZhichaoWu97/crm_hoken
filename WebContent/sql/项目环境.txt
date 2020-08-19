@@ -1,4 +1,4 @@
 版本：
-jdk
-tomcat
-mysql
+jdk1.8
+tomcat9
+mysql8.0.11

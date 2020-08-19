@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置常量 -->
+	<constant name="struts.action.extension" value="action"/>
+	
+	<package name="crm" extends="struts-default" namespace="/">
+	
+		<interceptors>
+			<interceptor name="privilegeInterceptor" class="web.interceptor.PrivilegeInterceptor"/>
+		</interceptors>
+		
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="success" type="redirect">/index.jsp</result>
+			<!-- <result name="login" type="redirect">http://www.baidu.com</result> -->
+			<result name="updateSuccess" >/jsp/success.jsp</result>
+			<result name="editSuccess">/jsp/user/edit.jsp</result>
+			<result name="registsuccess">/jsp/success.jsp</result>
+			<result name="exitSuccess" type="redirect">/login.jsp</result>
+			
+			<result name="02">/regist.jsp</result>
+			
+			
+			<interceptor-ref name="privilegeInterceptor">
+				<param name="excludeMethods">regist,login</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/>		
+		</action>
+		
+		<action name="customer_*" class="customerAction" method="{1}">
+			<result name="saveUI">/jsp/customer/add.jsp</result>
+			<result name="findAll">/jsp/customer/list.jsp</result>
+			<result name="editSuccess">/jsp/customer/edit.jsp</result>
+			<result name="saveSuccess" type="redirectAction">customer_findAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">customer_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">customer_findAll.action</result>
+			<result name="01">/jsp/customer/add.jsp</result>
+			
+			<interceptor-ref name="privilegeInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		
+		<action name="hoken_*" class="hokenAction" method="{1}">
+			<result name="saveUI">/jsp/hoken/add.jsp</result>
+			<result name="findAll">/jsp/hoken/list.jsp</result>
+			<result name="editSuccess">/jsp/hoken/edit.jsp</result>
+			<result name="saveSuccess" type="redirectAction">hoken_findAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">hoken_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">hoken_findAll.action</result>
+			<!-- <result name="input">/jsp/hoken/add.jsp</result>
+			<result name="login">/jsp/hoken/add.jsp</result> -->
+			<!-- <result name="login" type="redirectAction">hoken_saveUI.action</result> -->
+			
+			<interceptor-ref name="privilegeInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+		</action>
+	</package>
+	
+	
+	
+<!-- 	<package name="xxx" extends="struts-default" >
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="success">/index.jsp</result>
+			<result name="login">www.baidu.com</result>			
+		</action>
+	</package> -->
+</struts>

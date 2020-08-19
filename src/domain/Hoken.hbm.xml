@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.Hoken" table="hoken">
+		<id name="hoken_id" column="hoken_id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="hoken_name" column="hoken_name"/>
+		<!-- <property name="hoken_customer_id" column="hoken_customer_id"/> -->
+		<property name="hihokensha" column="hihokensha"/>
+		<property name="hihokensha_birthday" column="hihokensha_birthday"/>
+		<property name="hoken_kingaku" column="hoken_kingaku"/>
+		<property name="siharai_houhou" column="siharai_houhou"/>
+	
+ 	
+		<!-- 配置与客户的关系映射 -->
+		<many-to-one lazy="false" name="customer" class="domain.Customer" column="hoken_customer_id"/>
+
+	</class>
+</hibernate-mapping>
